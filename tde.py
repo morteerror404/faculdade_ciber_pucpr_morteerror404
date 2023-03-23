@@ -10,14 +10,18 @@ print("Seja bem vindo(a) ao jogo de operações matemáticas.")
 print()
 print()
 print("AVISO ! ESSE CÓDIGO TRABALHA COM RESPOSTA TRUNCADAS")
+print()
+print()
 
-# variaveis globais
-
+# variaveis 
 placar1 = 0
 placar2 = 0
-rodada = 0
-min = 0
+rodada = 1
 punicao = 0
+resposta = 0
+tipo_operacao = 0
+min = 0
+max = 0
 i = 0
 
 #definir quantos jogadores irão participar
@@ -36,32 +40,43 @@ def difficulty():
     dificuldade = input()
     dificuldade = int(dificuldade)
     return dificuldade
-
-# operação de resposta certa
-
-def resposta_certa():
-    
-    placar1 = (placar1 + 10) + punicao
-
-    print("Parabéns! jogador 1 marcou um ponto.")
-    print()
-    print("PLACAR :", placar1, "X", placar2)
-    rodada = rodada + 1
-    
-# operação de resposta errada
-
-def resposta_errada():
-    
-    placar2 = placar2 + 10
-
-    print("Que pena! jogador 2 marcou um ponto.")
-    print()
-    print("PLACAR :", placar1, "X", placar2)
-    rodada = rodada + 1
     
 # operação de adição
 
+def resposta_single():
+    global tipo_operacao
+    global placar1
+    global placar2
+    global rodada
+    global punicao
+    global resposta
+    
+    if tipo_operacao == resposta:
+        placar1 = placar1 + 10 + punicao
+
+        print("Parabéns! jogador 1 marcou um ponto.")
+        print()
+        print("PLACAR :", placar1, "X", placar2)
+        rodada = rodada + 1
+    
+    else:
+        placar2 += 10
+
+        print("Que pena! jogador 2 marcou um ponto.")
+        print()
+        print("PLACAR :", placar1, "X", placar2)
+        rodada = rodada + 1
+
+
 def addition():
+    
+    global placar1
+    global placar2
+    global rodada
+    global punicao
+    global resposta
+    global tipo_operacao
+    
     numero = random.randint(min, max)
     a = numero
 
@@ -69,7 +84,7 @@ def addition():
     b = numero
 
     tempo1 = time.time()
-    adicao = a + b
+    tipo_operacao = a + b
     resposta = print(a, "+", b, "= ")
     resposta = input()
     resposta = int(resposta)
@@ -78,12 +93,17 @@ def addition():
     tempo = tempo1 - tempo2
     tempo = int(tempo)
     punicao = tempo * 0.05
-    
-    
                         
 # operação de subtração 
 
 def subtraction():
+    
+    global placar1
+    global placar2
+    global rodada
+    global punicao
+    global resposta
+    global tipo_operacao
     
     numero = random.randint(min, max)
     a = numero
@@ -92,7 +112,7 @@ def subtraction():
     b = numero
 
     tempo1 = time.time()
-    subtracao = a - b
+    tipo_operacao = a - b
     resposta = print(a, "-", b, "= ")
     resposta = input()
     resposta = int(resposta)
@@ -101,12 +121,18 @@ def subtraction():
     tempo = tempo1 - tempo2
     tempo = int(tempo)
     punicao = tempo * 0.05
-             
-            
+        
 # operação de multiplicação
 
 def multiplication():
 
+    global placar1
+    global placar2
+    global rodada
+    global punicao
+    global resposta
+    global tipo_operacao
+    
     numero = random.randint(min, max)
     a = numero
 
@@ -114,7 +140,7 @@ def multiplication():
     b = numero
 
     tempo1 = time.time()
-    multiplicacao = a * b
+    tipo_operacao = a * b
     resposta = print(a, "*", b, "= ")
     resposta = input()
     resposta = int(resposta)
@@ -123,11 +149,17 @@ def multiplication():
     tempo = tempo1 - tempo2
     tempo = int(tempo)
     punicao = tempo * 0.05
-    
-
+        
 # operação de divisão
 
 def division():
+    
+    global placar1
+    global placar2
+    global rodada
+    global punicao
+    global resposta
+    global tipo_operacao
     
     numero = random.randint(min, max)
     a = numero
@@ -145,7 +177,7 @@ def division():
     else:
            
         tempo1 = time.time()
-        divisao = a / b
+        tipo_operacao = a / b
         resposta = print(a, "/", b, "= ")
         resposta = input()
         resposta = float(resposta)
@@ -156,26 +188,23 @@ def division():
         tempo = int(tempo)
         punicao = tempo * 0.05
 
-        if resposta == divisao:
-            return True
-            
-
 # operação para definir o final da partida single player
 
-
-# operação para definir o final da partida multi player 
-
-def partida_multi():
-    if placar1 > placar2 and rodada == 11:
-        print("Parabéns jogador você venceu!")
-        return True
-    elif placar2 > placar1 and rodada == 11:
-        print("Não foi dessa vez. Vitória do computador!")
-        return True
-    elif placar1 == placar2 and rodada == 11:
-        print("Temos um empate")
-        return True
+def fim_partida():
     
+    global placar1
+    global placar2
+    global rodada
+
+    if placar1 > placar2 and rodadas == 5:
+        print("Parabéns jogador você venceu!")
+        
+    elif placar2 > placar1 and rodadas == 5:
+        print("Não foi dessa vez. Vitória do computador!")
+        
+    elif placar1 == placar2 and rodadas == 5:
+        print("Temos um empate")
+        
 # ------------------------------------------------------------------------------------------------------------ #
 
 jogadores = players()
@@ -189,9 +218,7 @@ if jogadores != 1 and jogadores != 2:
         players()
         
 elif jogadores == 1:
-    rodada = 0
-    partida = False
-    partida = False
+    rodadas = 5
     dificuldade = difficulty()
             
     if (dificuldade != 1 and dificuldade != 2 and dificuldade != 3):
@@ -210,23 +237,111 @@ elif jogadores == 1:
         
         for i in "rodada":
             
-            rodada = rodada + 1
             print("RODADA ", rodada)
+            print()
+            print()
+            
             
             operacao = random.randint(1, 4)
             
             if operacao == 1:
                 addition()
+                resposta_single()
             elif operacao == 2:
                 subtraction()
+                resposta_single()
             elif operacao == 3:
                 multiplication()
+                resposta_single()
             elif operacao == 4:
                 division()
-            if i == 6 :
-                break
+                resposta_single()
+
+            if rodada == 6:
+                if placar1 > placar2 and rodada == 6:
+                    print("Parabéns jogador você venceu!")
+                    break
+                elif placar2 > placar1 and rodada == 6:
+                    print("Não foi dessa vez. Vitória do computador!")
+                    break
+                elif placar1 == placar2 and rodada == 6:
+                    print("Temos um empate")
+                    break
+    
+    elif dificuldade == 2:
+        
+        min = -100
+        max = 100
+        
+        for i in "rodada":
             
+            print("RODADA ", rodada)
+            print()
+            print()
             
+            operacao = random.randint(1, 4)
+            
+            if operacao == 1:
+                addition()
+                resposta_single()
+            elif operacao == 2:
+                subtraction()
+                resposta_single()
+            elif operacao == 3:
+                multiplication()
+                resposta_single()
+            elif operacao == 4:
+                division()
+                resposta_single()
+
+            if rodada == 6:
+                if placar1 > placar2 and rodada == 6:
+                    print("Parabéns jogador você venceu!")
+                    break
+                elif placar2 > placar1 and rodada == 6:
+                    print("Não foi dessa vez. Vitória do computador!")
+                    break
+                elif placar1 == placar2 and rodada == 6:
+                    print("Temos um empate")
+                    break
+                
+            
+    elif dificuldade == 3:
+        
+        min = -1000
+        max = 1000
+        
+        for i in "rodada":
+            
+            print("RODADA ", rodada)
+            print()
+            print()
+            
+            operacao = random.randint(1, 4)
+            
+            if operacao == 1:
+                addition()
+                resposta_single()
+            elif operacao == 2:
+                subtraction()
+                resposta_single()
+            elif operacao == 3:
+                multiplication()
+                resposta_single()
+            elif operacao == 4:
+                division()
+                resposta_single()
+            
+            if rodada == 6:
+                if placar1 > placar2 and rodada == 6:
+                    print("Parabéns jogador você venceu!")
+                    break
+                elif placar2 > placar1 and rodada == 6:
+                    print("Não foi dessa vez. Vitória do computador!")
+                    break
+                elif placar1 == placar2 and rodada == 6:
+                    print("Temos um empate")
+                    break
 
 
 # elif jogadores == 2:
