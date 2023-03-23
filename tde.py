@@ -41,7 +41,7 @@ def difficulty():
     dificuldade = int(dificuldade)
     return dificuldade
     
-# operação de adição
+# placar single player 
 
 def resposta_single():
     global tipo_operacao
@@ -67,6 +67,50 @@ def resposta_single():
         print("PLACAR :", placar1, "X", placar2)
         rodada = rodada + 1
 
+# placar multi player 
+
+def resposta_multi():
+    global placar1
+    global placar2
+    global rodada
+    global punicao
+    global resposta
+    global tipo_operacao
+        
+    if rodada % 2 == 0:
+        if tipo_operacao == resposta:
+            placar2 = placar2 + 10 + punicao
+
+            print("Parabéns! jogador 1 marcou um ponto.")
+            print()
+            print("PLACAR :", placar1, "X", placar2)
+            rodada = rodada + 1
+    
+        else:
+            placar1 += 10
+
+            print("Que pena! jogador 2 marcou um ponto.")
+            print()
+            print("PLACAR :", placar1, "X", placar2)
+            rodada = rodada + 1
+    else:
+        if tipo_operacao == resposta:
+            placar1 = placar1 + 10 + punicao
+
+            print("Parabéns! jogador 1 marcou um ponto.")
+            print()
+            print("PLACAR :", placar1, "X", placar2)
+            rodada = rodada + 1
+    
+        else:
+            placar2 += 10
+
+            print("Que pena! jogador 2 marcou um ponto.")
+            print()
+            print("PLACAR :", placar1, "X", placar2)
+            rodada = rodada + 1
+
+# operação de adição 
 
 def addition():
     
@@ -344,5 +388,126 @@ elif jogadores == 1:
                     break
 
 
-# elif jogadores == 2:
-    
+elif jogadores == 2:
+    rodadas = 10
+    dificuldade = difficulty()
+
+    if (dificuldade != 1 and dificuldade != 2 and dificuldade != 3):
+        while (True):
+            print()
+            print()
+            print()
+            print("Desculpa não entendi digite novamente")
+            print()
+            difficulty()
+
+    elif dificuldade == 1:
+
+        min = -10
+        max = 10
+
+        for i in "rodada":
+
+            print("RODADA ", rodada)
+            print()
+            print()
+
+            operacao = random.randint(1, 4)
+
+            if operacao == 1:
+                addition()
+                resposta_multi()
+            elif operacao == 2:
+                subtraction()
+                resposta_multi()
+            elif operacao == 3:
+                multiplication()
+                resposta_multi()
+            elif operacao == 4:
+                division()
+                resposta_multi()
+
+            if rodada == 6:
+                if placar1 > placar2 and rodada == 11:
+                    print("Parabéns jogador você venceu!")
+                    break
+                elif placar2 > placar1 and rodada == 11:
+                    print("Não foi dessa vez. Vitória do computador!")
+                    break
+                elif placar1 == placar2 and rodada == 11:
+                    print("Temos um empate")
+                    break
+
+    elif dificuldade == 2:
+
+        min = -100
+        max = 100
+
+        for i in "rodada":
+
+            print("RODADA ", rodada)
+            print()
+            print()
+
+            operacao = random.randint(1, 4)
+
+            if operacao == 1:
+                addition()
+                resposta_multi()
+            elif operacao == 2:
+                subtraction()
+                resposta_multi()
+            elif operacao == 3:
+                multiplication()
+                resposta_multi()
+            elif operacao == 4:
+                division()
+                resposta_multi()
+
+            if rodada == 6:
+                if placar1 > placar2 and rodada == 11:
+                    print("Parabéns jogador você venceu!")
+                    break
+                elif placar2 > placar1 and rodada == 11:
+                    print("Não foi dessa vez. Vitória do computador!")
+                    break
+                elif placar1 == placar2 and rodada == 11:
+                    print("Temos um empate")
+                    break
+
+    elif dificuldade == 3:
+
+        min = -1000
+        max = 1000
+
+        for i in "rodada":
+
+            print("RODADA ", rodada)
+            print()
+            print()
+
+            operacao = random.randint(1, 4)
+
+            if operacao == 1:
+                addition()
+                resposta_multi()
+            elif operacao == 2:
+                subtraction()
+                resposta_multi()
+            elif operacao == 3:
+                multiplication()
+                resposta_multi()
+            elif operacao == 4:
+                division()
+                resposta_multi()
+
+            if rodada == 6:
+                if placar1 > placar2 and rodada == 11:
+                    print("Parabéns jogador você venceu!")
+                    break
+                elif placar2 > placar1 and rodada == 11:
+                    print("Não foi dessa vez. Vitória do computador!")
+                    break
+                elif placar1 == placar2 and rodada == 11:
+                    print("Temos um empate")
+                    break
