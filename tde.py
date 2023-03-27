@@ -39,7 +39,6 @@ def difficulty():
     dificuldade = print("digite a dificuldade que você quer jogar. 1, 2 ou 3")
     dificuldade = input()
     dificuldade = int(dificuldade)
-    return dificuldade
     
 # placar single player 
 
@@ -387,6 +386,7 @@ elif jogadores == 1:
                     print("Temos um empate")
                     break
 
+# Dois jogadores
 
 elif jogadores == 2:
     rodadas = 10
@@ -428,13 +428,13 @@ elif jogadores == 2:
                 resposta_multi()
 
             if rodada == 6:
-                if placar1 > placar2 and rodada == 11:
+                if placar1 > placar2 and rodada == 6:
                     print("Parabéns jogador você venceu!")
                     break
-                elif placar2 > placar1 and rodada == 11:
+                elif placar2 > placar1 and rodada == 6:
                     print("Não foi dessa vez. Vitória do computador!")
                     break
-                elif placar1 == placar2 and rodada == 11:
+                elif placar1 == placar2 and rodada == 6:
                     print("Temos um empate")
                     break
 
@@ -465,13 +465,13 @@ elif jogadores == 2:
                 resposta_multi()
 
             if rodada == 6:
-                if placar1 > placar2 and rodada == 11:
+                if placar1 > placar2 and rodada == 6:
                     print("Parabéns jogador você venceu!")
                     break
-                elif placar2 > placar1 and rodada == 11:
+                elif placar2 > placar1 and rodada == 6:
                     print("Não foi dessa vez. Vitória do computador!")
                     break
-                elif placar1 == placar2 and rodada == 11:
+                elif placar1 == placar2 and rodada == 6:
                     print("Temos um empate")
                     break
 
@@ -502,12 +502,12 @@ elif jogadores == 2:
                 resposta_multi()
 
             if rodada == 6:
-                if placar1 > placar2 and rodada == 11:
+                if placar1 > placar2 and rodada == 6:
                     print("Parabéns jogador você venceu!")
                     break
-                elif placar2 > placar1 and rodada == 11:
+                elif placar2 > placar1 and rodada == 6:
                     print("Não foi dessa vez. Vitória do computador!")
                     break
-                elif placar1 == placar2 and rodada == 11:
+                elif placar1 == placar2 and rodada == 6:
                     print("Temos um empate")
                     break
