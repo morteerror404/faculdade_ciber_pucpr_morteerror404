@@ -16,7 +16,7 @@ erros = 0
 
 # escolher uma palavra em uma bliblioteca 
 def buscarPalavra():
-    global segredo, rodada, nome_arquivo
+    global segredo, rodada
     
     print("DIGITE UMA PALAVRA:")
     segredo = input()
@@ -33,10 +33,20 @@ def digite():
         digite()
     else:
         rodada += 1
-        localiza_caractere()
-
+        verifica_caractere()
+        
+# função para localizar caractere
+def localiza_caractere():
+    global resultado, palavra, underlines, erros, caractere
+    
+    for elemento in range(len(palavra)):
+        if caractere == palavra[elemento]:
+            resultado[elemento] = caractere
+            return True
+        else:
+            return False
+        
 # cria _ e imprime
-
 def cria_underline():
     global resultado, palavra, underlines, segredo, rodada
     if rodada == 0:
@@ -53,19 +63,15 @@ def cria_underline():
 
         palavra = [palavra for palavra in segredo]
         
-# localiza o caractere e retorna a posição 
-    
-def localiza_caractere():
+# localiza o caractere e retorna a posição     
+def verifica_caractere():
     global resultado, palavra, underlines, erros, caractere
+    localiza_caractere()
     
-    if caractere not in palavra:
+    if localiza_caractere == False:
         erros += 1
         criar_boneco()
-    elif caractere in palavra:
-        for elemento in range(len(palavra)):
-            if caractere == palavra[elemento]:
-                resultado[elemento] = caractere
-        
+    elif localiza_caractere == True:
         print(resultado)
         
 # cria o boneco 
@@ -158,6 +164,7 @@ def limpaTela():
     print()
     print()
     print()
+    
 # --------------------------------------------------------------------------------------------------------------- #
 
 buscarPalavra()
