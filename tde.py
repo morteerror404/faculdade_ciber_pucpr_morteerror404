@@ -1,4 +1,4 @@
-#código de joão pedro ferreira frota, cibersegurança turma U
+#código de joão pedro frota, Cassio e Rudiele. cibersegurança turma U
 
 import random
 import time
