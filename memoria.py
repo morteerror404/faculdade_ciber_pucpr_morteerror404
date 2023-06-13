@@ -1,4 +1,5 @@
-import random 
+import random, os, time
+
      
 def cria_vetor():
     
@@ -29,7 +30,7 @@ def cria_vetor():
         random.shuffle(vet)
 
     vetor_matriz(dimensao, vet)
-    
+
 def vetor_matriz(dimensao, vet):
     matriz_verdadeira = []
     contador = 0
@@ -42,14 +43,15 @@ def vetor_matriz(dimensao, vet):
             else:
                 linha.append(None)
         matriz_verdadeira.append(linha)
-
-    printa_memorize(dimensao, matriz_verdadeira)
-    
+        
+    cria_matriz_falsa(dimensao)
+    ver_novamente(dimensao, matriz_verdadeira)
 
 def printa_memorize(dimensao, matriz_verdadeira):
 
     for p in range(dimensao):
         print(matriz_verdadeira[p])
+        
         
 def cria_matriz_falsa(dimensao):
     matriz_falsa = []
@@ -89,11 +91,42 @@ def printa_matriz_falsa(matriz_falsa, dimensao):
                     
 def verifica_matriz_falsa(matriz_falsa, dimensao):
     
+    verificado = 0
+    
     for i in range(dimensao):
         for j in range(dimensao):
             
             if matriz_falsa[j] == "#":
-                verificado = False
+                verificado += 1
                 
-                    
+def roda_jogo(verificado):
+    while verificado == 0:
+        tentativa()
+        atualiza_matriz_falsa()
+        verifica_matriz_falsa()
+        printa_matriz_falsa()
+        
+def ver_novamente(dimensao, matriz_verdadeira):
+    while True:
+        printa_memorize(dimensao, matriz_verdadeira)
+        
+        time.sleep(3)
+        
+        limpar_terminal()
+        print("Deseja ver novamente ? s ou n")
+        resposta = input()
+
+        if resposta == "n":
+            print("Então vamos começar =)")
+            limpar_terminal()
+            roda_jogo()
+            break
+            
+def limpar_terminal():
+    if os.name == 'posix':
+        os.system('clear')
+    elif os.name == 'nt':
+        os.system('cls')
+        
+        
 cria_vetor()
