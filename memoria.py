@@ -51,4 +51,49 @@ def printa_memorize(dimensao, matriz_verdadeira):
     for p in range(dimensao):
         print(matriz_verdadeira[p])
         
+def cria_matriz_falsa(dimensao):
+    matriz_falsa = []
+    
+    for i in range(dimensao):
+        for j in range(dimensao):
+            matriz_falsa.append("#")         
+            
+def tentativa():
+    print("Digite a primeira cordenada, separe por linha coluna por uma vírgula:")
+    cordenada1 = input()
+    print("Digite a primeira cordenada, separe por linha coluna por uma vírgula:")
+    cordenada2 = input()
+    
+    linha1, coluna1 = map(int, cordenada1.split(',')) 
+    linha2, coluna2 = map(int, cordenada2.split(','))
+    
+
+def atualiza_matriz_falsa(linha1, linha2, coluna1, coluna2, matriz_falsa, matriz_verdadeira):
+    
+    matriz_falsa[linha1][coluna1] = matriz_verdadeira[linha1][coluna1]
+    matriz_falsa[linha2][coluna2] = matriz_verdadeira[linha2][coluna2]
+
+    elemento1 = matriz_falsa[linha1][coluna1]
+    elemento2 = matriz_falsa[linha2][coluna2]
+
+    printa_matriz_falsa(matriz_falsa)
+    
+    if elemento1 != elemento2:
+        matriz_falsa[linha1][coluna1] = "#"
+        matriz_falsa[linha2][coluna2] = "#"
+
+def printa_matriz_falsa(matriz_falsa, dimensao):
+    
+    for p in range(dimensao):
+        print(matriz_falsa[p])
+                    
+def verifica_matriz_falsa(matriz_falsa, dimensao):
+    
+    for i in range(dimensao):
+        for j in range(dimensao):
+            
+            if matriz_falsa[j] == "#":
+                verificado = False
+                
+                    
 cria_vetor()
