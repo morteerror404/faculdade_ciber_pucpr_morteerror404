@@ -1,0 +1,28 @@
+{
+   "usuarios": [
+    {
+        "nome": "pedro",
+        "senha": "abcd"
+    },
+    {
+        "nome": "cassio",
+        "senha": "1234"
+    },
+    {
+        "nome": "elisa",
+        "senha": "xyzw"
+    },
+    {
+        "nome": "cleber",
+        "senha": "çççç"
+    },
+    {
+        "nome": "neymar",
+        "senha": "bola!"
+    },
+    {
+        "nome": "moreninho",
+        "senha": "1919"
+    }
+   ] 
+}

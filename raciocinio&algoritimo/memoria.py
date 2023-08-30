@@ -27,8 +27,7 @@ def cria_vetor(dimensao, vet, matriz_verdadeira):
         dificuldade = int(input())
         
     caracteres = [chr(i) for i in range(65, 91)]
-    tamanho = (dimensao * dimensao) / 2
-    tamanho = int(tamanho)
+    tamanho = (dimensao * dimensao) // 2
     
     for i in range(tamanho):
         letra = random.choice(caracteres)
@@ -48,16 +47,21 @@ def cria_vetor(dimensao, vet, matriz_verdadeira):
             else:
                 linha.append(None)
         matriz_verdadeira.append(linha)
-        
+    
+    return dimensao
+    
+
 def cria_matriz_falsa(dimensao):
     matriz_falsa = []
-    
-    for i in range(dimensao):
-        for j in range(dimensao):
-            matriz_falsa.append("#")         
-            
+
+    for _ in range(dimensao):
+        linha = ["#" for _ in range(dimensao)]
+        matriz_falsa.append(linha)
+
+    return matriz_falsa
 
 def tentativa(linha1, linha2, coluna1, coluna2, matriz_falsa, matriz_verdadeira):
+    
     print("Digite a primeira cordenada, separe por linha coluna por uma vírgula:")
     cordenada1 = input()
     print("Digite a primeira cordenada, separe por linha coluna por uma vírgula:")
@@ -74,13 +78,31 @@ def tentativa(linha1, linha2, coluna1, coluna2, matriz_falsa, matriz_verdadeira)
 
     
     if elemento1 != elemento2:
+        print()
+        print("resposta errada")
+        print()
+        printa_matriz_falsa(matriz_falsa)
+        print()
+        
         matriz_falsa[linha1][coluna1] = "#"
         matriz_falsa[linha2][coluna2] = "#"
-
-def printa_matriz_falsa(matriz_falsa, dimensao):
     
-    for p in range(dimensao):
-        print(matriz_falsa[p])
+    else:
+        print()
+        print("resposta correta")
+        print()
+        printa_matriz_falsa(matriz_falsa)
+        print()
+        
+def printa_matriz_verdadeira(matriz_verdadeira):
+    
+    for p in matriz_verdadeira:
+        print(p)
+
+def printa_matriz_falsa(matriz_falsa):
+    
+    for p in matriz_falsa:
+        print(p)
                     
 def verifica_matriz_falsa(matriz_falsa, dimensao):
     
@@ -91,7 +113,8 @@ def verifica_matriz_falsa(matriz_falsa, dimensao):
             
             if matriz_falsa[j] == "#":
                 verificado += 1
-            
+    return verificado
+    
 def limpar_terminal():
     if os.name == 'posix':
         os.system('clear')
@@ -99,14 +122,14 @@ def limpar_terminal():
         os.system('cls')
         
         
-cria_vetor(dimensao, vet, matriz_verdadeira)
+dimensao = cria_vetor(dimensao, vet, matriz_verdadeira)
+matriz_falsa = cria_matriz_falsa(dimensao)
 
 while True:
     
-    for p in range(dimensao):
-        print(matriz_verdadeira[p])
+    printa_matriz_verdadeira(matriz_verdadeira)
             
-    time.sleep(3)
+    time.sleep(5)
 
     limpar_terminal()
     print("Deseja ver novamente ? s ou n")
@@ -118,7 +141,9 @@ while True:
         break
 
 while verificado == 0:
+
     tentativa(linha1, linha2, coluna1, coluna2,matriz_falsa, matriz_verdadeira)
+    print(" ")
     verifica_matriz_falsa(matriz_falsa, dimensao)
-    printa_matriz_falsa(matriz_falsa, dimensao)
+    
     
