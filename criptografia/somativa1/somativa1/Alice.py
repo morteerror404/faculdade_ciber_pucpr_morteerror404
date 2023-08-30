@@ -1,8 +1,6 @@
 import socket
 import RSALib as RSA
 import AESLib as AES
-import binascii
-from base64 import b64encode,b64decode
 
 # 1) ALICE GERA AS CHAVES PÚBLICAS E PRIVADA
 
@@ -20,7 +18,8 @@ while True:
     if datastr == "HELLO":
         # 2) ALICE TRANSMITE SUA CHAVE PÙBLICA 
         # -- troque string CHAVE PUBLICA pela chave publica em formato base64 (e remova o encode)
-        s.sendto('CHAVE PUBLICA'.b64encode(), addr)
+
+        s.sendto(RSA.converteChavePublica(public_pem="chavepriva.pem"), addr )
 
         # 3) ALICE RECEBE A CHAVE SECRETA DE BOB (em formato PEM) criptografada
         chaveCifrada, addr = s.recvfrom(1024)
@@ -28,8 +27,7 @@ while True:
 
         # 4) ALICE DESCRIPTOGRAFA A chave secreta e converte para binário
         # observe que a chave não é texto, por isso use a opção text=False
-        
-        chaveSecreta = format(chaveSecreta, 'b')
+        chaveSecreta = None
 
         # 5) ALICE criptografa uma mensagem para BOM usando essa chave
         mensagem = 'OLA! Voce criou um canal criptografado com a ALICE.'

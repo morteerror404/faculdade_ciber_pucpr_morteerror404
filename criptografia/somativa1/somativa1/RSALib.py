@@ -101,7 +101,7 @@ if __name__ == "__main__":
 
     # Obj são estruturas usadas pelo algoritmo em Python, PEM são chaves transportáveis (serializadas) em formato base64
     # Observe que o formato PEM é um formato padrão independente da linguagem, mas Obj é um formato do Python
-    chavePriObj, chavePriPEM = geraChavePrivada(2048, "chavepriva.pem")
+    chavePriObj, chavePriPEM = geraChavePrivada(128, "chavepriva.pem")
     chavePubObj, chavePubPEM = geraChavePublica(chavePriObj, "chavepublica.pem")
 
     print(chavePriPEM.decode(), '\n' )
