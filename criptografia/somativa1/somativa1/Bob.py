@@ -44,13 +44,13 @@ try:
     print(chavesecreta)
 # 3) BOB CRIPTOGRAFA A CHAVE SECRETA (EM BYTES) COM A CHAVE PÚBLICA DA ALICE
 #  -- observe que nesse caso, a opção é text=False
-    ChaveCifrada = AES.cifraMensagem(chavesecreta,chavePubObj)
-    
+    ChaveCifrada = AES.cifraMensagem(chavesecreta, chavePubObj, text = False)
+    print(ChaveCifrada)
     
 # 4) BOB ENVIA A CHAVE SECRETA CRIPTOGRAFADA PARA ALICE
 #    -- é preciso trocar a string CHAVE SECRETA pela chave secreta criptografada em formato base64 (remova o encode())
-
-    s.sendto(RSA.converteChavePublica(chavesecreta), destino )
+    RSA.converteChavePublica(chavesecreta)
+    s.sendto(chavesecreta, destino)
     print(f'Enviei uma chave secreta para {addr}')
     print('CHAVE CIFRADA : ', ChaveCifrada)
 
