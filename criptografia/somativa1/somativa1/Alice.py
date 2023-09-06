@@ -26,23 +26,16 @@ while True:
         chaveCifrada, addr = s.recvfrom(1024)
         print(f'Recebi uma chave cifrada de {addr}')
 
-        # 4) ALICE DESCRIPTOGRAFA A chave secreta e converte para binário
+       # 4) ALICE DESCRIPTOGRAFA A chave secreta e converte para binário
         # observe que a chave não é texto, por isso use a opção text=False
-        chaveSecreta = None
-
+        chaveSecreta = AES.decifraMensagem(chaveCifrada, chavePubObj, text=False)
+        
         # 5) ALICE criptografa uma mensagem para BOB usando essa chave
         mensagem = 'OLA! Voce criou um canal criptografado com a ALICE.'
-        ciphertext = 'BOB NAO FEZ O EXERCICIO'.encode()
+        ciphertext = AES.cifraMensagem(mensagem, chaveSecreta)
 
         # 6) ALICE envia a mensagem cifrada para BOB
         # -- troque a string MENSAGEM CIFRADA pela variavel com a mensagem criptografada em base64 (e remova o encode)
-        #s.sendto('MENSAGEM CIFRADA'.encode(), addr )  
-        s.sendto(ciphertext, addr )   
-        print(f'Envie uma mensagem cifrada para {addr}')   
-   
-    else: 
-        print('descartei uma mensagem de ', addr)
-
-
-
-
+        # s.sendto('MENSAGEM CIFRADA'.encode(), addr )
+        s.sendto(ciphertext, addr)
+        print(f'Envie uma mensagem cifrada para {addr}')

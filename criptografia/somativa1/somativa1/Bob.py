@@ -37,20 +37,22 @@ try:
     chavePubPEM, addr = s.recvfrom(1024) 
     print('RECEBI uma chave pública')
     chavePubObj = RSA.converteChavePublica(chavePubPEM)
-
+    print(chavePubObj)
+    
 # 2) BOB GERA UMA CHAVE SECRETA ALEATÓRIA
     chavesecreta, chavePEM = AES.geraChave(128)
-
+    print(chavesecreta)
 # 3) BOB CRIPTOGRAFA A CHAVE SECRETA (EM BYTES) COM A CHAVE PÚBLICA DA ALICE
 #  -- observe que nesse caso, a opção é text=False
-    ChaveCifrada = AES.cifraMensagem(chavesecreta, chavePubObj, text= True)
-
+    ChaveCifrada = AES.cifraMensagem(chavesecreta,chavePubObj)
+    
+    
 # 4) BOB ENVIA A CHAVE SECRETA CRIPTOGRAFADA PARA ALICE
 #    -- é preciso trocar a string CHAVE SECRETA pela chave secreta criptografada em formato base64 (remova o encode())
 
     s.sendto(RSA.converteChavePublica(chavesecreta), destino )
     print(f'Enviei uma chave secreta para {addr}')
-    print('Chave Cifrada:', ChaveCifrada)
+    print('CHAVE CIFRADA : ', ChaveCifrada)
 
 # 5) BOB DESCRIPTOGRAFA UMA MENSAGEM CIFRADA DA ALICE
 # -- é preciso descriptografar o ciphertext e salvar em plain text!!!
